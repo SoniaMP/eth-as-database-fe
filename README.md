@@ -1,30 +1,38 @@
-# Empresa frontend app
-
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+# Company mgmg project
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/socsonhja-gmailcoms-projects/v0-empresa-frontend-app)
 [![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/8gDTnXRRUQO)
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+A modern web application built with **React** and **Vite**.  
+Designed to be fast, lightweight, and easy to maintain.  
+It currently implements a simple interface that serves as a foundation for building new features.
 
-## Deployment
+---
 
-Your project is live at:
+## What does this app do?
 
-**[https://vercel.com/socsonhja-gmailcoms-projects/v0-empresa-frontend-app](https://vercel.com/socsonhja-gmailcoms-projects/v0-empresa-frontend-app)**
+- **Instant start** with Vite’s blazing-fast dev server.
+- **Structured React setup** for agile development.
+- Starter example for managing components, hooks, and state.
+- Ready to extend with routing, API calls, and responsive design.
 
-## Build your app
+---
 
-Continue building your app on:
+## 🚀 Prerequisites
 
-**[https://v0.dev/chat/projects/8gDTnXRRUQO](https://v0.dev/chat/projects/8gDTnXRRUQO)**
+- **Node.js** v22 or later.
+- **npm** (bundled with Node.js) or **yarn**.
 
-## How It Works
+---
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## 📥 Installation
+
+Clone this repository and install the dependencies:
+
+```bash
+git clone https://github.com/SoniaMP/eth-as-database-fe.git
+cd folder-name
+npm install
+```
