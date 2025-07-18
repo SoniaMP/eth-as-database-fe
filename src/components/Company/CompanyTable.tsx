@@ -43,13 +43,7 @@ export const CompanyTable = ({
     <TableContainer>
       <Table>
         <TableHead>
-          <TableRow
-            sx={
-              {
-                // backgroundColor: alpha(theme.palette.primary.main, 0.05),
-              }
-            }
-          >
+          <TableRow>
             <TableCell sx={{ fontWeight: "bold", color: "primary.main" }}>
               Nombre
             </TableCell>
@@ -71,19 +65,8 @@ export const CompanyTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item, index) => (
-            <TableRow
-              key={item.id}
-              sx={{
-                "&:hover": {
-                  // backgroundColor: alpha(theme.palette.primary.main, 0.02),
-                },
-                // backgroundColor:
-                //   index % 2 === 0
-                //     ? "transparent"
-                //     : alpha(theme.palette.grey[100], 0.3),
-              }}
-            >
+          {data.map((item) => (
+            <TableRow key={item.id}>
               <TableCell>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <BusinessIcon color="primary" sx={{ fontSize: 20 }} />
@@ -121,24 +104,14 @@ export const CompanyTable = ({
                   <IconButton
                     size="small"
                     onClick={() => onEdit(item)}
-                    sx={{
-                      color: "primary.main",
-                      "&:hover": {
-                        // backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                      },
-                    }}
+                    sx={{ color: "primary.main" }}
                   >
                     <EditIcon fontSize="small" />
                   </IconButton>
                   <IconButton
                     size="small"
                     onClick={() => onDelete(item)}
-                    sx={{
-                      color: "error.main",
-                      "&:hover": {
-                        // backgroundColor: alpha(theme.palette.error.main, 0.1),
-                      },
-                    }}
+                    sx={{ color: "error.main" }}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>

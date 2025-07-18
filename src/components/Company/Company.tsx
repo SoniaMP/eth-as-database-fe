@@ -30,48 +30,49 @@ import { CompanyTable } from "./CompanyTable";
 import { CompanyForm } from "./CompanyForm";
 import DeleteConfirmDialog from "./DeleteConfirmDialog";
 import AddFab from "../common/AddFab";
+import { SummaryContainer } from "../styled";
 
 export const Company = () => {
   const theme = useTheme();
-  const [empresas, setEmpresas] = useState<ICompany[]>(data);
+  const [companies, setCompanies] = useState<ICompany[]>(data);
   const [formOpen, setFormOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [empresaToDelete, setEmpresaToDelete] = useState<ICompany | null>(null);
+  const [companyToDelete, setCompanyToDelete] = useState<ICompany | null>(null);
   const { showSuccess } = useAppSnackbar();
 
-  const handleAddEmpresa = () => {
+  const handleAddCompany = () => {
     setSelectedCompany(null);
     setFormOpen(true);
   };
 
-  const handleEditEmpresa = (empresa: ICompany) => {
-    setSelectedCompany(empresa);
+  const handleEditCompany = (company: ICompany) => {
+    setSelectedCompany(company);
     setFormOpen(true);
   };
 
-  const handleDeleteCompany = (empresa: ICompany) => {
-    setEmpresaToDelete(empresa);
+  const handleDeleteCompany = (company: ICompany) => {
+    setCompanyToDelete(company);
     setDeleteDialogOpen(true);
   };
 
-  const handleSaveEmpresa = (
-    empresaData: Omit<ICompany, "id" | "fechaCreacion">
+  const handleSaveCompany = (
+    companyData: Omit<ICompany, "id" | "fechaCreacion">
   ) => {
     if (selectedCompany) {
-      setEmpresas((prev) =>
-        prev.map((emp) =>
-          emp.id === selectedCompany.id ? { ...emp, ...empresaData } : emp
+      setCompanies((prev) =>
+        prev.map((comp) =>
+          comp.id === selectedCompany.id ? { ...comp, ...companyData } : comp
         )
       );
-      showSuccess("Empresa actualizada correctamente");
+      showSuccess("Company actualizada correctamente");
     } else {
-      const newEmpresa: ICompany = {
+      const newCompany: ICompany = {
         id: Date.now().toString(),
-        ...empresaData,
+        ...companyData,
         fechaCreacion: new Date().toISOString(),
       };
-      setEmpresas((prev) => [...prev, newEmpresa]);
+      setCompanies((prev) => [...prev, newCompany]);
       showSuccess("Empresa creada correctamente");
     }
     setFormOpen(false);
@@ -79,69 +80,38 @@ export const Company = () => {
   };
 
   const handleConfirmDelete = () => {
-    if (empresaToDelete) {
-      setEmpresas((prev) =>
-        prev.filter((emp) => emp.id !== empresaToDelete.id)
+    if (companyToDelete) {
+      setCompanies((prev) =>
+        prev.filter((comp) => comp.id !== companyToDelete.id)
       );
       showSuccess("Empresa eliminada correctamente");
     }
     setDeleteDialogOpen(false);
-    setEmpresaToDelete(null);
+    setCompanyToDelete(null);
   };
 
   return (
     <>
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Stack spacing={4}>
-          <Box
-            sx={{
-              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-              borderRadius: 3,
-              p: 4,
-              color: "white",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                top: -20,
-                right: -20,
-                opacity: 0.1,
-                transform: "rotate(15deg)",
-              }}
-            >
-              <BusinessIcon sx={{ fontSize: 120 }} />
-            </Box>
-            <Typography variant="h3" component="h1" fontWeight="bold">
+          <SummaryContainer Icon={BusinessIcon}>
+            <Typography variant="h3" fontWeight="bold">
               Gestión de Empresas
             </Typography>
             <Typography variant="h6" sx={{ opacity: 0.9 }}>
               Sistema de administración para alta, baja y modificación de
-              empresas
+              companies
             </Typography>
             <Chip
-              label={`${empresas.length} empresas registradas`}
-              sx={{
-                mt: 2,
-                color: "white",
-                fontWeight: "bold",
-              }}
+              label={`${companies.length} companies registradas`}
+              sx={{ color: "white", fontWeight: "bold" }}
             />
-          </Box>
+          </SummaryContainer>
 
-          <Paper
-            elevation={0}
-            sx={{
-              borderRadius: 3,
-              overflow: "hidden",
-              border: `1px solid ${theme.palette.divider}`,
-            }}
-          >
+          <Paper elevation={8}>
             <Box
               sx={{
-                p: 3,
+                p: 2,
                 borderBottom: `1px solid ${theme.palette.divider}`,
               }}
             >
@@ -150,13 +120,13 @@ export const Company = () => {
               </Typography>
             </Box>
 
-            {empresas.length === 0 ? (
+            {companies.length === 0 ? (
               <Box sx={{ p: 6, textAlign: "center" }}>
                 <BusinessIcon
                   sx={{ fontSize: 64, color: "text.secondary", mb: 2 }}
                 />
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                  No hay empresas registradas
+                  No hay companies registradas
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Haz clic en el botón + para agregar tu primera empresa
@@ -164,14 +134,14 @@ export const Company = () => {
               </Box>
             ) : (
               <CompanyTable
-                data={empresas}
+                data={companies}
                 onDelete={handleDeleteCompany}
-                onEdit={handleEditEmpresa}
+                onEdit={handleEditCompany}
               />
             )}
           </Paper>
 
-          <AddFab onClick={handleAddEmpresa} />
+          <AddFab onClick={handleAddCompany} />
         </Stack>
       </Container>
 
@@ -181,15 +151,15 @@ export const Company = () => {
           setFormOpen(false);
           setSelectedCompany(null);
         }}
-        onSave={handleSaveEmpresa}
-        empresa={selectedCompany}
+        onSave={handleSaveCompany}
+        company={selectedCompany}
       />
 
       <DeleteConfirmDialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
         onConfirm={handleConfirmDelete}
-        empresaName={empresaToDelete?.nombre || ""}
+        empresaName={companyToDelete?.nombre || ""}
       />
     </>
   );

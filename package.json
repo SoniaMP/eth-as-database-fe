@@ -25,6 +25,7 @@
     "react-dom": "^19",
     "react-hook-form": "latest",
     "recharts": "latest",
+    "styled-components": "^6.1.19",
     "vite": "latest",
     "yaml": "latest",
     "zod": "^3.24.1"

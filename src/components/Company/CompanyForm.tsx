@@ -21,19 +21,19 @@ import {
 } from "@mui/icons-material";
 import { ICompany } from "./interfaces";
 
-interface EmpresaFormProps {
+interface ICompanyFormProps {
   open: boolean;
   onClose: () => void;
-  onSave: (empresa: Omit<ICompany, "id" | "fechaCreacion">) => void;
-  empresa?: ICompany | null;
+  onSave: (company: Omit<ICompany, "id" | "fechaCreacion">) => void;
+  company?: ICompany | null;
 }
 
 export const CompanyForm = ({
   open,
   onClose,
   onSave,
-  empresa,
-}: EmpresaFormProps) => {
+  company,
+}: ICompanyFormProps) => {
   const theme = useTheme();
   const [formData, setFormData] = useState({
     nombre: "",
@@ -47,11 +47,11 @@ export const CompanyForm = ({
   });
 
   useEffect(() => {
-    if (empresa) {
+    if (company) {
       setFormData({
-        nombre: empresa.nombre,
-        direccion: empresa.direccion,
-        cif: empresa.cif,
+        nombre: company.nombre,
+        direccion: company.direccion,
+        cif: company.cif,
       });
     } else {
       setFormData({
@@ -61,7 +61,7 @@ export const CompanyForm = ({
       });
     }
     setErrors({ nombre: "", direccion: "", cif: "" });
-  }, [empresa, open]);
+  }, [company, open]);
 
   const validateCIF = (cif: string): boolean => {
     const cifRegex = /^[ABCDEFGHJNPQRSUVW]\d{8}$/;
@@ -154,7 +154,7 @@ export const CompanyForm = ({
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <BusinessIcon />
           <Typography variant="h6" component="div">
-            {empresa ? "Editar Empresa" : "Nueva Empresa"}
+            {company ? "Editar Empresa" : "Nueva Empresa"}
           </Typography>
         </Box>
         <IconButton
@@ -174,7 +174,7 @@ export const CompanyForm = ({
         <DialogContent sx={{ pt: 3 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
             <TextField
-              label="Nombre de la empresa"
+              label="Nombre de la company"
               value={formData.nombre}
               onChange={handleChange("nombre")}
               error={!!errors.nombre}
@@ -249,7 +249,7 @@ export const CompanyForm = ({
               background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
             }}
           >
-            {empresa ? "Actualizar" : "Guardar"}
+            {company ? "Actualizar" : "Guardar"}
           </Button>
         </DialogActions>
       </form>

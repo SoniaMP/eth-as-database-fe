@@ -6,7 +6,6 @@ import {
   Typography,
   Box,
   useTheme,
-  alpha,
   AppBar,
   Toolbar,
   Tabs,
@@ -18,17 +17,17 @@ import {
   People as ClientIcon,
   Receipt as InvoiceIcon,
 } from "@mui/icons-material";
-import ProductosTab from "./components/ProductosTab";
 import ClientesTab from "./components/ClientesTab";
-import FacturasTab from "./components/FacturasTab";
 import { Company } from "./components/Company";
+import FacturasTab from "./components/FacturasTab";
+import { Products } from "./components/Products";
 
 const TabContent = ({ tabIndex }: { tabIndex: number }) => {
   switch (tabIndex) {
     case 0:
       return <Company />;
     case 1:
-      return <ProductosTab />;
+      return <Products />;
     case 2:
       return <ClientesTab />;
     case 3:
