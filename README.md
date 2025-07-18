@@ -1,4 +1,4 @@
-# Company mgmg project
+# Company management project
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/socsonhja-gmailcoms-projects/v0-empresa-frontend-app)
 [![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/8gDTnXRRUQO)
@@ -35,4 +35,11 @@ Clone this repository and install the dependencies:
 git clone https://github.com/SoniaMP/eth-as-database-fe.git
 cd folder-name
 npm install
+```
+
+Run it in local environment using
+
+```bash
+npm start
+npm dev
 ```

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "nombre": "Tecnología Avanzada S.L.",
+    "direccion": "Calle Mayor 123, 28001 Madrid",
+    "cif": "B12345678",
+    "fechaCreacion": "2023-01-15"
+  },
+  {
+    "id": "2",
+    "nombre": "Innovación Digital S.A.",
+    "direccion": "Avenida de la Paz 456, 08001 Barcelona",
+    "cif": "A87654321",
+    "fechaCreacion": "2023-03-22"
+  }
+]

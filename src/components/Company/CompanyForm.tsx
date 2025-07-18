@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
+import type React from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -13,29 +13,38 @@ import {
   Typography,
   IconButton,
   useTheme,
-} from "@mui/material"
-import { Close as CloseIcon, Business as BusinessIcon, Save as SaveIcon } from "@mui/icons-material"
-import type { Empresa } from "../App"
+} from "@mui/material";
+import {
+  Close as CloseIcon,
+  Business as BusinessIcon,
+  Save as SaveIcon,
+} from "@mui/icons-material";
+import { ICompany } from "./interfaces";
 
 interface EmpresaFormProps {
-  open: boolean
-  onClose: () => void
-  onSave: (empresa: Omit<Empresa, "id" | "fechaCreacion">) => void
-  empresa?: Empresa | null
+  open: boolean;
+  onClose: () => void;
+  onSave: (empresa: Omit<ICompany, "id" | "fechaCreacion">) => void;
+  empresa?: ICompany | null;
 }
 
-export default function EmpresaForm({ open, onClose, onSave, empresa }: EmpresaFormProps) {
-  const theme = useTheme()
+export const CompanyForm = ({
+  open,
+  onClose,
+  onSave,
+  empresa,
+}: EmpresaFormProps) => {
+  const theme = useTheme();
   const [formData, setFormData] = useState({
     nombre: "",
     direccion: "",
     cif: "",
-  })
+  });
   const [errors, setErrors] = useState({
     nombre: "",
     direccion: "",
     cif: "",
-  })
+  });
 
   useEffect(() => {
     if (empresa) {
@@ -43,81 +52,83 @@ export default function EmpresaForm({ open, onClose, onSave, empresa }: EmpresaF
         nombre: empresa.nombre,
         direccion: empresa.direccion,
         cif: empresa.cif,
-      })
+      });
     } else {
       setFormData({
         nombre: "",
         direccion: "",
         cif: "",
-      })
+      });
     }
-    setErrors({ nombre: "", direccion: "", cif: "" })
-  }, [empresa, open])
+    setErrors({ nombre: "", direccion: "", cif: "" });
+  }, [empresa, open]);
 
   const validateCIF = (cif: string): boolean => {
-    const cifRegex = /^[ABCDEFGHJNPQRSUVW]\d{8}$/
-    return cifRegex.test(cif.toUpperCase())
-  }
+    const cifRegex = /^[ABCDEFGHJNPQRSUVW]\d{8}$/;
+    return cifRegex.test(cif.toUpperCase());
+  };
 
-  const handleChange = (field: keyof typeof formData) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    setFormData((prev) => ({ ...prev, [field]: value }))
+  const handleChange =
+    (field: keyof typeof formData) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setFormData((prev) => ({ ...prev, [field]: value }));
 
-    // Limpiar error cuando el usuario empiece a escribir
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }))
-    }
-  }
+      // Limpiar error cuando el usuario empiece a escribir
+      if (errors[field]) {
+        setErrors((prev) => ({ ...prev, [field]: "" }));
+      }
+    };
 
   const validateForm = (): boolean => {
-    const newErrors = { nombre: "", direccion: "", cif: "" }
-    let isValid = true
+    const newErrors = { nombre: "", direccion: "", cif: "" };
+    let isValid = true;
 
     if (!formData.nombre.trim()) {
-      newErrors.nombre = "El nombre es obligatorio"
-      isValid = false
+      newErrors.nombre = "El nombre es obligatorio";
+      isValid = false;
     } else if (formData.nombre.trim().length < 2) {
-      newErrors.nombre = "El nombre debe tener al menos 2 caracteres"
-      isValid = false
+      newErrors.nombre = "El nombre debe tener al menos 2 caracteres";
+      isValid = false;
     }
 
     if (!formData.direccion.trim()) {
-      newErrors.direccion = "La dirección es obligatoria"
-      isValid = false
+      newErrors.direccion = "La dirección es obligatoria";
+      isValid = false;
     } else if (formData.direccion.trim().length < 5) {
-      newErrors.direccion = "La dirección debe tener al menos 5 caracteres"
-      isValid = false
+      newErrors.direccion = "La dirección debe tener al menos 5 caracteres";
+      isValid = false;
     }
 
     if (!formData.cif.trim()) {
-      newErrors.cif = "El CIF es obligatorio"
-      isValid = false
+      newErrors.cif = "El CIF es obligatorio";
+      isValid = false;
     } else if (!validateCIF(formData.cif)) {
-      newErrors.cif = "El formato del CIF no es válido (ej: B12345678)"
-      isValid = false
+      newErrors.cif = "El formato del CIF no es válido (ej: B12345678)";
+      isValid = false;
     }
 
-    setErrors(newErrors)
-    return isValid
-  }
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (validateForm()) {
       onSave({
         nombre: formData.nombre.trim(),
         direccion: formData.direccion.trim(),
         cif: formData.cif.toUpperCase().trim(),
-      })
+      });
     }
-  }
+  };
 
   const handleClose = () => {
-    setFormData({ nombre: "", direccion: "", cif: "" })
-    setErrors({ nombre: "", direccion: "", cif: "" })
-    onClose()
-  }
+    setFormData({ nombre: "", direccion: "", cif: "" });
+    setErrors({ nombre: "", direccion: "", cif: "" });
+    onClose();
+  };
 
   return (
     <Dialog
@@ -199,7 +210,10 @@ export default function EmpresaForm({ open, onClose, onSave, empresa }: EmpresaF
               value={formData.cif}
               onChange={handleChange("cif")}
               error={!!errors.cif}
-              helperText={errors.cif || "Formato: Letra seguida de 8 dígitos (ej: B12345678)"}
+              helperText={
+                errors.cif ||
+                "Formato: Letra seguida de 8 dígitos (ej: B12345678)"
+              }
               fullWidth
               variant="outlined"
               inputProps={{
@@ -240,5 +254,5 @@ export default function EmpresaForm({ open, onClose, onSave, empresa }: EmpresaF
         </DialogActions>
       </form>
     </Dialog>
-  )
-}
+  );
+};
