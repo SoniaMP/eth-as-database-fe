@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import BusinessIcon from "@mui/icons-material/Business";
 
 type CellRenderFn = (value: string) => React.ReactNode;
@@ -13,6 +13,9 @@ export const cellRenders: Record<string, CellRenderFn> = {
                 </Typography>
             </Box>
         );
+    },
+    vatNumber: (value) => {
+        return <Chip label={value} size="small" variant="outlined" color="primary" />;
     },
     date: (value) => {
         return (
