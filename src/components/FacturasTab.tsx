@@ -1,5 +1,5 @@
-"use client"
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -18,7 +18,7 @@ import {
   Snackbar,
   useTheme,
   alpha,
-} from "@mui/material"
+} from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
@@ -26,21 +26,21 @@ import {
   Receipt as InvoiceIcon,
   Visibility as ViewIcon,
   Download as DownloadIcon,
-} from "@mui/icons-material"
+} from "@mui/icons-material";
 
 export interface Factura {
-  id: string
-  numero: string
-  cliente: string
-  fecha: Date
-  vencimiento: Date
-  total: number
-  estado: "Pendiente" | "Pagada" | "Vencida"
-  items: number
+  id: string;
+  numero: string;
+  cliente: string;
+  fecha: Date;
+  vencimiento: Date;
+  total: number;
+  estado: "Pendiente" | "Pagada" | "Vencida";
+  items: number;
 }
 
 export default function FacturasTab() {
-  const theme = useTheme()
+  const theme = useTheme();
   const [facturas, setFacturas] = useState<Factura[]>([
     {
       id: "1",
@@ -72,37 +72,42 @@ export default function FacturasTab() {
       estado: "Vencida",
       items: 5,
     },
-  ])
+  ]);
 
   const [snackbar, setSnackbar] = useState<{
-    open: boolean
-    message: string
-    severity: "success" | "error" | "info"
+    open: boolean;
+    message: string;
+    severity: "success" | "error" | "info";
   }>({
     open: false,
     message: "",
     severity: "success",
-  })
+  });
 
   const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }))
-  }
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
 
   const getEstadoColor = (estado: string) => {
     switch (estado) {
       case "Pagada":
-        return "success"
+        return "success";
       case "Pendiente":
-        return "warning"
+        return "warning";
       case "Vencida":
-        return "error"
+        return "error";
       default:
-        return "default"
+        return "default";
     }
-  }
+  };
 
-  const totalFacturado = facturas.reduce((sum, factura) => sum + factura.total, 0)
-  const facturasPendientes = facturas.filter((f) => f.estado === "Pendiente").length
+  const totalFacturado = facturas.reduce(
+    (sum, factura) => sum + factura.total,
+    0,
+  );
+  const facturasPendientes = facturas.filter(
+    (f) => f.estado === "Pendiente",
+  ).length;
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -188,13 +193,28 @@ export default function FacturasTab() {
           <Table>
             <TableHead>
               <TableRow sx={{ backgroundColor: alpha("#7b1fa2", 0.05) }}>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Número</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Cliente</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Fecha</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Vencimiento</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Total</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>Estado</TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Número
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Cliente
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Fecha
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Vencimiento
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Total
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#7b1fa2" }}>
+                  Estado
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ fontWeight: "bold", color: "#7b1fa2" }}
+                >
                   Acciones
                 </TableCell>
               </TableRow>
@@ -207,7 +227,10 @@ export default function FacturasTab() {
                     "&:hover": {
                       backgroundColor: alpha("#7b1fa2", 0.02),
                     },
-                    backgroundColor: index % 2 === 0 ? "transparent" : alpha(theme.palette.grey[100], 0.3),
+                    backgroundColor:
+                      index % 2 === 0
+                        ? "transparent"
+                        : alpha(theme.palette.grey[100], 0.3),
                   }}
                 >
                   <TableCell>
@@ -234,7 +257,11 @@ export default function FacturasTab() {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="body1" fontWeight="600" color="success.main">
+                    <Typography
+                      variant="body1"
+                      fontWeight="600"
+                      color="success.main"
+                    >
                       €{factura.total.toFixed(2)}
                     </Typography>
                   </TableCell>
@@ -247,7 +274,9 @@ export default function FacturasTab() {
                     />
                   </TableCell>
                   <TableCell align="center">
-                    <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
+                    <Box
+                      sx={{ display: "flex", gap: 1, justifyContent: "center" }}
+                    >
                       <IconButton
                         size="small"
                         sx={{
@@ -264,7 +293,10 @@ export default function FacturasTab() {
                         sx={{
                           color: "info.main",
                           "&:hover": {
-                            backgroundColor: alpha(theme.palette.info.main, 0.1),
+                            backgroundColor: alpha(
+                              theme.palette.info.main,
+                              0.1,
+                            ),
                           },
                         }}
                       >
@@ -286,7 +318,10 @@ export default function FacturasTab() {
                         sx={{
                           color: "error.main",
                           "&:hover": {
-                            backgroundColor: alpha(theme.palette.error.main, 0.1),
+                            backgroundColor: alpha(
+                              theme.palette.error.main,
+                              0.1,
+                            ),
                           },
                         }}
                       >
@@ -326,10 +361,15 @@ export default function FacturasTab() {
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} variant="filled" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>
     </Container>
-  )
+  );
 }

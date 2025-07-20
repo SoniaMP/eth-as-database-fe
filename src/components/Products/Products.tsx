@@ -29,13 +29,13 @@ export const Products = () => {
 
   const handleEditProduct = (product: IProduct) => {
     showWarning(
-      `Funcionalidad para editar producto ${product.name} aún no implementada`
+      `Funcionalidad para editar producto ${product.name} aún no implementada`,
     );
   };
 
   const handleDeleteProduct = (product: IProduct) => {
     showWarning(
-      `Funcionalidad para eliminar producto ${product.name} aún no implementada`
+      `Funcionalidad para eliminar producto ${product.name} aún no implementada`,
     );
   };
 

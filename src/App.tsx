@@ -1,5 +1,3 @@
-"use client";
-
 import type React from "react";
 import { useState } from "react";
 import {
@@ -17,12 +15,15 @@ import {
   People as ClientIcon,
   Receipt as InvoiceIcon,
 } from "@mui/icons-material";
-import ClientesTab from "./components/ClientesTab";
+
+
 import { Company } from "./components/Company";
 import FacturasTab from "./components/FacturasTab";
 import { Products } from "./components/Products";
+import ClientesTab from "./components/ClientesTab";
 
 const TabContent = ({ tabIndex }: { tabIndex: number }) => {
+
   switch (tabIndex) {
     case 0:
       return <Company />;

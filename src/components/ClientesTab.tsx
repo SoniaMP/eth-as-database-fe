@@ -1,5 +1,5 @@
-"use client"
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 import {
   Container,
   Typography,
@@ -18,7 +18,7 @@ import {
   Snackbar,
   useTheme,
   alpha,
-} from "@mui/material"
+} from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
@@ -26,20 +26,20 @@ import {
   People as ClientIcon,
   Email as EmailIcon,
   Phone as PhoneIcon,
-} from "@mui/icons-material"
+} from "@mui/icons-material";
 
 export interface Cliente {
-  id: string
-  nombre: string
-  email: string
-  telefono: string
-  empresa: string
-  direccion: string
-  fechaRegistro: Date
+  id: string;
+  nombre: string;
+  email: string;
+  telefono: string;
+  empresa: string;
+  direccion: string;
+  fechaRegistro: Date;
 }
 
 export default function ClientesTab() {
-  const theme = useTheme()
+  const theme = useTheme();
   const [clientes, setClientes] = useState<Cliente[]>([
     {
       id: "1",
@@ -59,21 +59,21 @@ export default function ClientesTab() {
       direccion: "Avenida Diagonal 123, Barcelona",
       fechaRegistro: new Date("2023-02-15"),
     },
-  ])
+  ]);
 
   const [snackbar, setSnackbar] = useState<{
-    open: boolean
-    message: string
-    severity: "success" | "error" | "info"
+    open: boolean;
+    message: string;
+    severity: "success" | "error" | "info";
   }>({
     open: false,
     message: "",
     severity: "success",
-  })
+  });
 
   const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }))
-  }
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -142,12 +142,25 @@ export default function ClientesTab() {
           <Table>
             <TableHead>
               <TableRow sx={{ backgroundColor: alpha("#2e7d32", 0.05) }}>
-                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>Cliente</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>Contacto</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>Empresa</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>Dirección</TableCell>
-                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>Registro</TableCell>
-                <TableCell align="center" sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                  Cliente
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                  Contacto
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                  Empresa
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                  Dirección
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", color: "#2e7d32" }}>
+                  Registro
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ fontWeight: "bold", color: "#2e7d32" }}
+                >
                   Acciones
                 </TableCell>
               </TableRow>
@@ -160,7 +173,10 @@ export default function ClientesTab() {
                     "&:hover": {
                       backgroundColor: alpha("#2e7d32", 0.02),
                     },
-                    backgroundColor: index % 2 === 0 ? "transparent" : alpha(theme.palette.grey[100], 0.3),
+                    backgroundColor:
+                      index % 2 === 0
+                        ? "transparent"
+                        : alpha(theme.palette.grey[100], 0.3),
                   }}
                 >
                   <TableCell>
@@ -172,15 +188,29 @@ export default function ClientesTab() {
                     </Box>
                   </TableCell>
                   <TableCell>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <EmailIcon sx={{ fontSize: 16, color: "text.secondary" }} />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.5,
+                      }}
+                    >
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
+                        <EmailIcon
+                          sx={{ fontSize: 16, color: "text.secondary" }}
+                        />
                         <Typography variant="body2" color="text.secondary">
                           {cliente.email}
                         </Typography>
                       </Box>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <PhoneIcon sx={{ fontSize: 16, color: "text.secondary" }} />
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                      >
+                        <PhoneIcon
+                          sx={{ fontSize: 16, color: "text.secondary" }}
+                        />
                         <Typography variant="body2" color="text.secondary">
                           {cliente.telefono}
                         </Typography>
@@ -203,7 +233,9 @@ export default function ClientesTab() {
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Box sx={{ display: "flex", gap: 1, justifyContent: "center" }}>
+                    <Box
+                      sx={{ display: "flex", gap: 1, justifyContent: "center" }}
+                    >
                       <IconButton
                         size="small"
                         sx={{
@@ -220,7 +252,10 @@ export default function ClientesTab() {
                         sx={{
                           color: "error.main",
                           "&:hover": {
-                            backgroundColor: alpha(theme.palette.error.main, 0.1),
+                            backgroundColor: alpha(
+                              theme.palette.error.main,
+                              0.1,
+                            ),
                           },
                         }}
                       >
@@ -260,10 +295,15 @@ export default function ClientesTab() {
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} variant="filled" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>
     </Container>
-  )
+  );
 }

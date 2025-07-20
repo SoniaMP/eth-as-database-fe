@@ -1,0 +1,11 @@
+{
+    "companiesTable": {
+        "columns": [
+            { "id": "id", "label": "ID" },
+            { "id": "name", "label": "Nombre", "customRender": "name" },
+            { "id": "address", "label": "Dirección" },
+            { "id": "vatNumber", "label": "CIF" },
+            { "id": "dateCreated", "label": "Fecha de creación" }
+        ]
+    }
+}

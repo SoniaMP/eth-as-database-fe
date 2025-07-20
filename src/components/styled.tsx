@@ -1,40 +1,40 @@
-/*
- * .
- *        . * .
- *      * RRRR  *   Copyright (c) 2012 - 2025
- *     .  RR  R  .  EUIPO - European Union Intellectual Property Office
- *     *  RRR    *
- *      . RR RR .   ALL RIGHTS RESERVED
- *       *. _ .*
- * .
- *  The use and distribution of this software is under the restrictions exposed in 'license.txt'
- */
+import { Box, BoxProps, styled, Theme, Typography, TypographyProps } from "@mui/material";
 
-import { Box, BoxProps, styled } from "@mui/material";
-
-export const SummaryContainer = styled(
-  ({ Icon, children, ...props }: BoxProps & { Icon?: React.ElementType }) => (
+export const SummaryContainer = styled(({ Icon, children, ...props }: BoxProps & { Icon?: React.ElementType }) => (
     <Box {...props}>
-      {Icon && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: -20,
-            right: -20,
-            opacity: 0.1,
-            transform: "rotate(15deg)",
-          }}
-        >
-          <Icon sx={{ fontSize: 120 }} />
-        </Box>
-      )}
-      {children}
+        {Icon && (
+            <Box
+                sx={{
+                    position: "absolute",
+                    top: -20,
+                    right: -20,
+                    opacity: 0.1,
+                    transform: "rotate(15deg)",
+                }}
+            >
+                <Icon sx={{ fontSize: 120 }} />
+            </Box>
+        )}
+        {children}
     </Box>
-  )
-)(({ theme }) => ({
-  position: "relative",
-  background: theme.palette.primary.main,
-  borderRadius: theme.spacing(1),
-  padding: theme.spacing(4),
-  color: "white",
+))(({ theme }) => ({
+    position: "relative",
+    background: theme.palette.primary.main,
+    borderRadius: theme.spacing(1),
+    padding: theme.spacing(4),
+    color: "white",
+}));
+
+export const SummaryTitle = styled((props: TypographyProps) => (
+    <Box
+        sx={{
+            p: 2,
+            borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`,
+        }}
+    >
+        <Typography variant="h5" {...props} />
+    </Box>
+))(({ theme }) => ({
+    fontWeight: "bold",
+    color: theme.palette.primary.main,
 }));
