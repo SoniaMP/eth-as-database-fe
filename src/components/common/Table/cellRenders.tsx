@@ -14,4 +14,15 @@ export const cellRenders: Record<string, CellRenderFn> = {
             </Box>
         );
     },
+    date: (value) => {
+        return (
+            <Typography variant="body2" color="text.secondary">
+                {new Date(value).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                })}
+            </Typography>
+        );
+    },
 };

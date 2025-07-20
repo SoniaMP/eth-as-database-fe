@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BusinessIcon from "@mui/icons-material/Business";
 import { Container, Paper, Stack } from "@mui/material";
 
 import { useAppSnackbar } from "@/providers/snackbar/useAppSnackbar";
 import tablesConfig from "@/config/tableColumns.json";
 
-import data from "./data.json";
 import { ICompany } from "./interfaces";
 import { CompanyForm } from "./CompanyForm";
 import DeleteConfirmDialog from "../common/DeleteConfirmDialog";
@@ -15,15 +14,22 @@ import ConfigurableTable from "../common/Table/ConfigurableTable";
 import Summary from "../common/Summary";
 import { ESummaryType } from "../common/interfaces";
 import EmptyData from "../common/EmptyData";
+import { createCompany, deleteCompany, getCompanies, updateCompany } from "./services";
 
 export const Company = () => {
-    const [companies, setCompanies] = useState<ICompany[]>(data);
+    const [companies, setCompanies] = useState<ICompany[]>([]);
     const [formOpen, setFormOpen] = useState(false);
     const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [companyToDelete, setCompanyToDelete] = useState<ICompany | null>(null);
     const { showSuccess } = useAppSnackbar();
     const { columns } = tablesConfig.companiesTable || {};
+
+    useEffect(() => {
+        getCompanies().then((res) => {
+            setCompanies(res);
+        });
+    }, []);
 
     const handleAddCompany = () => {
         setSelectedCompany(null);
@@ -40,27 +46,32 @@ export const Company = () => {
         setDeleteDialogOpen(true);
     };
 
-    const handleSaveCompany = (companyData: Omit<ICompany, "id" | "fechaCreacion">) => {
+    const handleSaveCompany = async (companyData: Omit<ICompany, "id" | "fechaCreacion">) => {
         if (selectedCompany) {
-            setCompanies((prev) =>
-                prev.map((comp) => (comp.id === selectedCompany.id ? { ...comp, ...companyData } : comp)),
-            );
+            const newCompany: ICompany = await updateCompany(selectedCompany.id, {
+                ...selectedCompany,
+                ...companyData,
+            });
+            setCompanies((prev) => prev.map((comp) => (comp.id === newCompany.id ? newCompany : comp)));
             showSuccess("Company actualizada correctamente");
         } else {
             const newCompany: ICompany = {
-                id: Date.now().toString(),
+                id: companies.length + 1,
                 ...companyData,
                 dateCreated: new Date().toISOString(),
             };
-            setCompanies((prev) => [...prev, newCompany]);
+            const createdCompany = await createCompany(newCompany);
+            const newCompanies = [...companies, createdCompany];
+            setCompanies(newCompanies);
             showSuccess("Empresa creada correctamente");
         }
         setFormOpen(false);
         setSelectedCompany(null);
     };
 
-    const handleConfirmDelete = () => {
+    const handleConfirmDelete = async () => {
         if (companyToDelete) {
+            await deleteCompany(companyToDelete.id);
             setCompanies((prev) => prev.filter((comp) => comp.id !== companyToDelete.id));
             showSuccess("Empresa eliminada correctamente");
         }
@@ -81,7 +92,7 @@ export const Company = () => {
                         ) : (
                             <ConfigurableTable
                                 columns={columns}
-                                data={data}
+                                data={companies}
                                 onDelete={handleDeleteCompany}
                                 onEdit={handleEditCompany}
                             />

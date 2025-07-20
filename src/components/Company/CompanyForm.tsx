@@ -27,36 +27,36 @@ interface ICompanyFormProps {
 export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProps) => {
     const theme = useTheme();
     const [formData, setFormData] = useState({
-        nombre: "",
-        direccion: "",
-        cif: "",
+        name: "",
+        address: "",
+        vatNumber: "",
     });
     const [errors, setErrors] = useState({
-        nombre: "",
-        direccion: "",
-        cif: "",
+        name: "",
+        address: "",
+        vatNumber: "",
     });
 
     useEffect(() => {
         if (company) {
             setFormData({
-                nombre: company.nombre,
-                direccion: company.direccion,
-                cif: company.cif,
+                name: company.name,
+                address: company.address,
+                vatNumber: company.vatNumber,
             });
         } else {
             setFormData({
-                nombre: "",
-                direccion: "",
-                cif: "",
+                name: "",
+                address: "",
+                vatNumber: "",
             });
         }
-        setErrors({ nombre: "", direccion: "", cif: "" });
+        setErrors({ name: "", address: "", vatNumber: "" });
     }, [company, open]);
 
-    const validateCIF = (cif: string): boolean => {
+    const validateCIF = (vatNumber: string): boolean => {
         const cifRegex = /^[ABCDEFGHJNPQRSUVW]\d{8}$/;
-        return cifRegex.test(cif.toUpperCase());
+        return cifRegex.test(vatNumber.toUpperCase());
     };
 
     const handleChange = (field: keyof typeof formData) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,30 +70,30 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
     };
 
     const validateForm = (): boolean => {
-        const newErrors = { nombre: "", direccion: "", cif: "" };
+        const newErrors = { name: "", address: "", vatNumber: "" };
         let isValid = true;
 
-        if (!formData.nombre.trim()) {
-            newErrors.nombre = "El nombre es obligatorio";
+        if (!formData.name.trim()) {
+            newErrors.name = "El name es obligatorio";
             isValid = false;
-        } else if (formData.nombre.trim().length < 2) {
-            newErrors.nombre = "El nombre debe tener al menos 2 caracteres";
-            isValid = false;
-        }
-
-        if (!formData.direccion.trim()) {
-            newErrors.direccion = "La dirección es obligatoria";
-            isValid = false;
-        } else if (formData.direccion.trim().length < 5) {
-            newErrors.direccion = "La dirección debe tener al menos 5 caracteres";
+        } else if (formData.name.trim().length < 2) {
+            newErrors.name = "El name debe tener al menos 2 caracteres";
             isValid = false;
         }
 
-        if (!formData.cif.trim()) {
-            newErrors.cif = "El CIF es obligatorio";
+        if (!formData.address.trim()) {
+            newErrors.address = "La dirección es obligatoria";
             isValid = false;
-        } else if (!validateCIF(formData.cif)) {
-            newErrors.cif = "El formato del CIF no es válido (ej: B12345678)";
+        } else if (formData.address.trim().length < 5) {
+            newErrors.address = "La dirección debe tener al menos 5 caracteres";
+            isValid = false;
+        }
+
+        if (!formData.vatNumber.trim()) {
+            newErrors.vatNumber = "El CIF es obligatorio";
+            isValid = false;
+        } else if (!validateCIF(formData.vatNumber)) {
+            newErrors.vatNumber = "El formato del CIF no es válido (ej: B12345678)";
             isValid = false;
         }
 
@@ -106,16 +106,17 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
 
         if (validateForm()) {
             onSave({
-                nombre: formData.nombre.trim(),
-                direccion: formData.direccion.trim(),
-                cif: formData.cif.toUpperCase().trim(),
+                name: formData.name.trim(),
+                address: formData.address.trim(),
+                vatNumber: formData.vatNumber.toUpperCase().trim(),
+                dateCreated: new Date().toISOString(),
             });
         }
     };
 
     const handleClose = () => {
-        setFormData({ nombre: "", direccion: "", cif: "" });
-        setErrors({ nombre: "", direccion: "", cif: "" });
+        setFormData({ name: "", address: "", vatNumber: "" });
+        setErrors({ name: "", address: "", vatNumber: "" });
         onClose();
     };
 
@@ -132,14 +133,7 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
                 },
             }}
         >
-            <DialogTitle
-                sx={{
-                    background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-                    color: "white",
-                    position: "relative",
-                    pr: 6,
-                }}
-            >
+            <DialogTitle>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <BusinessIcon />
                     <Typography variant="h6" component="div">
@@ -163,11 +157,11 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
                 <DialogContent sx={{ pt: 3 }}>
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
                         <TextField
-                            label="Nombre de la company"
-                            value={formData.nombre}
-                            onChange={handleChange("nombre")}
-                            error={!!errors.nombre}
-                            helperText={errors.nombre}
+                            label="Nombre de la empresa"
+                            value={formData.name}
+                            onChange={handleChange("name")}
+                            error={!!errors.name}
+                            helperText={errors.name}
                             fullWidth
                             variant="outlined"
                             sx={{
@@ -179,10 +173,10 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
 
                         <TextField
                             label="Dirección"
-                            value={formData.direccion}
-                            onChange={handleChange("direccion")}
-                            error={!!errors.direccion}
-                            helperText={errors.direccion}
+                            value={formData.address}
+                            onChange={handleChange("address")}
+                            error={!!errors.address}
+                            helperText={errors.address}
                             fullWidth
                             multiline
                             rows={2}
@@ -196,10 +190,10 @@ export const CompanyForm = ({ open, onClose, onSave, company }: ICompanyFormProp
 
                         <TextField
                             label="CIF"
-                            value={formData.cif}
-                            onChange={handleChange("cif")}
-                            error={!!errors.cif}
-                            helperText={errors.cif || "Formato: Letra seguida de 8 dígitos (ej: B12345678)"}
+                            value={formData.vatNumber}
+                            onChange={handleChange("vatNumber")}
+                            error={!!errors.vatNumber}
+                            helperText={errors.vatNumber || "Formato: Letra seguida de 8 dígitos (ej: B12345678)"}
                             fullWidth
                             variant="outlined"
                             sx={{
