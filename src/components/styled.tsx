@@ -20,9 +20,10 @@ export const SummaryContainer = styled(({ Icon, children, ...props }: BoxProps &
 ))(({ theme }) => ({
     position: "relative",
     background: theme.palette.primary.main,
-    borderRadius: theme.spacing(1),
+    borderRadius: theme.spacing(0.5),
     padding: theme.spacing(4),
     color: "white",
+    boxShadow: theme.shadows[4],
 }));
 
 export const SummaryTitle = styled((props: TypographyProps) => (

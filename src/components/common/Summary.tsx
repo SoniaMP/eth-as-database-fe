@@ -21,8 +21,8 @@ const Summary = ({ icon, summaryType, total }: ISummaryProps) => {
     const Icon = icon || null;
     return (
         <SummaryContainer Icon={Icon}>
-            <Stack spacing={2}>
-                <Typography variant="h3" fontWeight="bold">
+            <Stack spacing={1}>
+                <Typography variant="h4" fontWeight="bold">
                     {mapSummaryLiterals[summaryType]?.title || "Resumen"}
                 </Typography>
                 <Typography variant="h6" sx={{ opacity: 0.9 }}>

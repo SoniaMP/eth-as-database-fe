@@ -81,12 +81,11 @@ export const Company = () => {
 
     return (
         <>
-            <Container maxWidth="lg" sx={{ py: 4 }}>
-                <Stack spacing={4}>
+            <Container maxWidth="lg" sx={{ py: 3 }}>
+                <Stack spacing={2}>
                     <Summary summaryType={ESummaryType.COMPANIES} total={companies.length} icon={BusinessIcon} />
-                    <Paper elevation={8}>
+                    <Paper elevation={4}>
                         <SummaryTitle>Lista de Empresas</SummaryTitle>
-
                         {companies.length === 0 ? (
                             <EmptyData icon={BusinessIcon} summaryType={ESummaryType.COMPANIES} />
                         ) : (
