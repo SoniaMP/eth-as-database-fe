@@ -1,31 +1,51 @@
-# Company management project
-
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/socsonhja-gmailcoms-projects/v0-empresa-frontend-app)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/8gDTnXRRUQO)
+# Companies CRM - Blockchain Integration
 
 ## Overview
 
-A modern web application built with **React** and **Vite**.  
-Designed to be fast, lightweight, and easy to maintain.  
-It currently implements a simple interface that serves as a foundation for building new features.
+A decentralized Customer Relationship Management (CRM) system for small companies, enabling users to perform CRUD (Create, Read, Update, Delete) operations on company records through blockchain technology. Authentication is handled via MetaMask wallet login, ensuring secure and verifiable transactions.
 
----
+## Key Features
 
-## What does this app do?
+1. Wallet Authentication
 
-- **Instant start** with Vite’s blazing-fast dev server.
-- **Structured React setup** for agile development.
-- Starter example for managing components, hooks, and state.
-- Ready to extend with routing, API calls, and responsive design.
+- MetaMask Integration: Users must connect their Ethereum wallet (via MetaMask) to access the applicatio
+- Web3 Identity: Wallet address serves as the user's unique identifier
+- On-Chain Verification: All transactions are cryptographically signed
 
----
+2. Company Management (CRUD Operations)
+
+- Hashes sensitive data (like VAT numbers) before blockchain storage
+- Emits transaction with company details
+- Stores transaction hash for auditability
+
+3. Read
+
+- Fetches company data from both:
+  - Smart contract storage (on-chain)
+  - Local database (off-chain metadata)
+- Verifies data integrity against blockchain records
+
+## Workflow
+
+1. User connects wallet via MetaMask
+2. Application detects active chain (local/testnet/mainnet)
+3. CRUD operations trigger MetaMask transaction prompts
+4. Signed transactions are broadcast to the network
+5. UI updates upon transaction confirmation
 
 ## 🚀 Prerequisites
 
 - **Node.js** v22 or later.
 - **npm** (bundled with Node.js) or **yarn**.
+- **Metamask**
 
----
+## Technical Stack
+
+- **Frontend**: React/Vue with ethers.js/web3.js
+- **Smart Contracts**: Solidity (Foundry/Hardhat)
+- **Local Development**: Anvil local blockchain
+- **Wallet Integration**: MetaMask API
+
 
 ## 📥 Installation
 
