@@ -39,6 +39,10 @@ A decentralized Customer Relationship Management (CRM) system for small companie
 - **npm** (bundled with Node.js) or **yarn**.
 - **Metamask**
 
+## Configure Metamask to work with Anvil
+
+See more info in this [link](CONFIGURATIONS.md).
+
 ## Technical Stack
 
 - **Frontend**: React/Vue with ethers.js/web3.js
