@@ -8,7 +8,7 @@ A decentralized Customer Relationship Management (CRM) system for small companie
 
 1. Wallet Authentication
 
-- MetaMask Integration: Users must connect their Ethereum wallet (via MetaMask) to access the applicatio
+- MetaMask Integration: Users must connect their Ethereum wallet (via MetaMask) to access the application
 - Web3 Identity: Wallet address serves as the user's unique identifier
 - On-Chain Verification: All transactions are cryptographically signed
 
@@ -21,8 +21,8 @@ A decentralized Customer Relationship Management (CRM) system for small companie
 3. Read
 
 - Fetches company data from both:
-  - Smart contract storage (on-chain)
-  - Local database (off-chain metadata)
+    - Smart contract storage (on-chain)
+    - Local database (off-chain metadata)
 - Verifies data integrity against blockchain records
 
 ## Workflow
@@ -49,7 +49,6 @@ See more info in this [link](CONFIGURATIONS.md).
 - **Smart Contracts**: Solidity (Foundry/Hardhat)
 - **Local Development**: Anvil local blockchain
 - **Wallet Integration**: MetaMask API
-
 
 ## 📥 Installation
 
