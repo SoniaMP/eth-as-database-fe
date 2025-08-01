@@ -1,80 +1,69 @@
 "use client";
-import { useState } from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  Paper,
-  Chip,
-  useTheme,
-  Stack,
-} from "@mui/material";
-import { Add as AddIcon, Inventory as ProductIcon } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { Container, Paper, Stack } from "@mui/material";
+import { Inventory as ProductIcon } from "@mui/icons-material";
 
-import data from "./data.json";
-import { ProductsTable } from "./ProductsTable";
+import tablesConfig from "@/config/tableColumns.json";
+
 import { IProduct } from "./interfaces";
 import { useAppSnackbar } from "@/providers/snackbar/useAppSnackbar";
-import { SummaryContainer } from "../styled";
+import { SummaryTitle } from "../styled";
 import AddFab from "../common/AddFab";
+import Summary from "../common/Summary";
+import { ESummaryType } from "../common/interfaces";
+import EmptyData from "../common/EmptyData";
+import ConfigurableTable from "../common/Table/ConfigurableTable";
+import { getProducts } from "../Company/services";
 
 export const Products = () => {
-  const theme = useTheme();
-  const [products, setProductos] = useState<IProduct[]>(data);
-  const { showWarning } = useAppSnackbar();
+    const [products, setProductos] = useState<IProduct[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [productToDelete, setProductToDelete] = useState<IProduct | null>(null);
+    const [formOpen, setFormOpen] = useState(false);
+    const { showWarning } = useAppSnackbar();
+    const { columns } = tablesConfig.productsTable || {};
 
-  const handleAddProduct = () => {
-    showWarning("Funcionalidad de añadir producto aún no implementada");
-  };
+    useEffect(() => {
+        getProducts().then((res) => {
+            setProductos(res);
+        });
+    }, []);
 
-  const handleEditProduct = (product: IProduct) => {
-    showWarning(
-      `Funcionalidad para editar producto ${product.name} aún no implementada`,
+    const handleAddProduct = () => {
+        setSelectedProduct(null);
+        setFormOpen(true);
+    };
+
+    const handleEditProduct = (product: IProduct) => {
+        setSelectedProduct(product);
+        setFormOpen(true);
+    };
+
+    const handleDeleteProduct = (product: IProduct) => {
+        setProductToDelete(product);
+        setDeleteDialogOpen(true);
+    };
+
+    return (
+        <Container maxWidth="lg" sx={{ py: 3 }}>
+            <Stack spacing={2}>
+                <Summary summaryType={ESummaryType.PRODUCTS} total={products.length} icon={ProductIcon} />
+                <Paper elevation={4}>
+                    <SummaryTitle>Gestión de Productos</SummaryTitle>
+                    {products.length === 0 ? (
+                        <EmptyData icon={ProductIcon} summaryType={ESummaryType.PRODUCTS} />
+                    ) : (
+                        <ConfigurableTable
+                            columns={columns}
+                            data={products}
+                            onDelete={handleDeleteProduct}
+                            onEdit={handleEditProduct}
+                        />
+                    )}
+                </Paper>
+                <AddFab onClick={handleAddProduct} />
+            </Stack>
+        </Container>
     );
-  };
-
-  const handleDeleteProduct = (product: IProduct) => {
-    showWarning(
-      `Funcionalidad para eliminar producto ${product.name} aún no implementada`,
-    );
-  };
-
-  return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Stack spacing={4}>
-        <SummaryContainer Icon={ProductIcon}>
-          <Typography variant="h3" fontWeight="bold">
-            Gestión de Productos
-          </Typography>
-          <Typography variant="h6" sx={{ opacity: 0.9 }}>
-            Administra tu inventario y catálogo de products
-          </Typography>
-          <Chip
-            label={`${products.length} products en inventario`}
-            sx={{ color: "white", fontWeight: "bold" }}
-          />
-        </SummaryContainer>
-
-        <Paper elevation={8}>
-          <Box
-            sx={{
-              p: 2,
-              borderBottom: `1px solid ${theme.palette.divider}`,
-            }}
-          >
-            <Typography variant="h5" fontWeight="600" color="secondary">
-              Lista de Productos
-            </Typography>
-          </Box>
-
-          <ProductsTable
-            products={products}
-            onDelete={handleDeleteProduct}
-            onEdit={handleEditProduct}
-          />
-        </Paper>
-      </Stack>
-      <AddFab onClick={handleAddProduct} />
-    </Container>
-  );
 };

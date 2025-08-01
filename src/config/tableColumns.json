@@ -4,8 +4,19 @@
             { "id": "id", "label": "ID" },
             { "id": "name", "label": "Nombre", "customRender": "name" },
             { "id": "address", "label": "Dirección" },
-            { "id": "vatNumber", "label": "CIF", "customRender": "vatNumber" },
-            { "id": "dateCreated", "label": "Fecha de creación", "customRender": "date" }
+            { "id": "vatNumber", "label": "CIF", "customRender": "chip" },
+            { "id": "dateCreated", "label": "Fecha de creación", "customRender": "date" },
+            { "id": "account", "label": "Dirección de Wallet", "customRender": "account" }
+        ]
+    },
+    "productsTable": {
+        "columns": [
+            { "id": "id", "label": "ID" },
+            { "id": "name", "label": "Nombre", "customRender": "name" },
+            { "id": "description", "label": "Descripción" },
+            { "id": "price", "label": "Precio", "customRender": "price" },
+            { "id": "image", "label": "Imagen", "customRender": "image" },
+            { "id": "companyAddress", "label": "Address", "customRender": "chip" }
         ]
     }
 }

@@ -1,18 +1,48 @@
 {
     "companies": [
         {
-            "id": "1",
-            "name": "Tecnología Avanzada S.L.",
+            "account": "0x1234567890abcdef1234567890abcdef12345678",
             "address": "Calle Mayor 123, 28001 Madrid",
-            "vatNumber": "B12345678",
-            "dateCreated": "2025-02-10T10:54:52.259Z"
+            "dateCreated": "2025-02-10T10:54:52.259Z",
+            "id": 1,
+            "name": "Tecnología Avanzada S.L.",
+            "vatNumber": "B12345678"
+        },
+        {
+            "account": "0xabcdefabcdefabcdefabcdefabcdefabcdef",
+            "address": "Avenida de la Paz 456, 08001 Barcelona",
+            "dateCreated": "2025-04-12T10:54:52.259Z",
+            "id": 2,
+            "name": "Innovación Digital S.A.",
+            "vatNumber": "A87654321"
+        },
+        {
+            "account": "0x1234567890abcdef1234567890abcdef12345678",
+            "address": "Mi dirección test",
+            "dateCreated": "2025-07-31T15:15:20.973Z",
+            "id": 3,
+            "name": "Test",
+            "vatNumber": "B12312312"
+        }
+    ],
+    "products": [
+        {
+            "id": "1",
+            "name": "Laptop Dell XPS 13",
+            "description": "Laptop ultrabook con procesador Intel i7",
+            "price": 1299.99,
+            "stock": 15,
+            "category": "Electrónicos",
+            "creationDate": "2023-01-15"
         },
         {
             "id": "2",
-            "name": "Innovación Digital S.A.",
-            "address": "Avenida de la Paz 456, 08001 Barcelona",
-            "vatNumber": "A87654321",
-            "dateCreated": "2025-04-12T10:54:52.259Z"
+            "name": "Mouse Logitech MX Master 3",
+            "description": "Mouse inalámbrico ergonómico para productividad",
+            "price": 89.99,
+            "stock": 45,
+            "category": "Accesorios",
+            "creationDate": "2023-02-20"
         }
     ]
 }

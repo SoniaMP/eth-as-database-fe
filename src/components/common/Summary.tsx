@@ -15,6 +15,11 @@ const mapSummaryLiterals: Record<ESummaryType, Record<string, string>> = {
         subtitle: "Sistema de administración para alta, baja y modificación de empresas",
         totalLabel: "empresas registradas",
     },
+    products: {
+        title: "Gestión de Productos",
+        subtitle: "Administra tu inventario y catálogo de productos",
+        totalLabel: "productos registrados",
+    },
 };
 
 const Summary = ({ icon, summaryType, total }: ISummaryProps) => {

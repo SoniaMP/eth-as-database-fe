@@ -1,4 +1,4 @@
- const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:8888";
 // const API_URL = "http://localhost:3000/api";
 
 export async function apiRequest(endpoint: string, method = "GET", body: any = null) {

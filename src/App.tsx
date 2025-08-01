@@ -12,6 +12,7 @@ import { Company } from "./components/Company";
 import FacturasTab from "./components/FacturasTab";
 import { Products } from "./components/Products";
 import ClientesTab from "./components/ClientesTab";
+import { WalletButton } from "./components/common/WalletButton";
 
 const TabContent = ({ tabIndex }: { tabIndex: number }) => {
     switch (tabIndex) {
@@ -44,6 +45,7 @@ const App = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
                         Sistema de Gestión Empresarial
                     </Typography>
+                    <WalletButton />
                 </Toolbar>
                 <Tabs
                     value={currentTab}
