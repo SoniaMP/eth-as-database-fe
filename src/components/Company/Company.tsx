@@ -4,6 +4,7 @@ import { Container, Paper, Stack } from "@mui/material";
 
 import { useAppSnackbar } from "@/providers/snackbar/useAppSnackbar";
 import tablesConfig from "@/config/tableColumns.json";
+import { useWallet } from "@/providers/useWallet";
 
 import { ICompany } from "./interfaces";
 import { CompanyForm } from "./CompanyForm";
@@ -23,13 +24,16 @@ export const Company = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [companyToDelete, setCompanyToDelete] = useState<ICompany | null>(null);
     const { showSuccess } = useAppSnackbar();
+    const { account } = useWallet();
     const { columns } = tablesConfig.companiesTable || {};
 
     useEffect(() => {
-        getCompanies().then((res) => {
+        if (!account) return;
+
+        getCompanies(account).then((res) => {
             setCompanies(res);
         });
-    }, []);
+    }, [account]);
 
     const handleAddCompany = () => {
         setSelectedCompany(null);
@@ -46,8 +50,8 @@ export const Company = () => {
         setDeleteDialogOpen(true);
     };
 
-    const handleSaveCompany = async (companyData: Omit<ICompany, "id" | "fechaCreacion">) => {
-        if (selectedCompany) {
+    const handleSaveCompany = async (companyData: ICompany) => {
+        if (selectedCompany && selectedCompany.id) {
             const newCompany: ICompany = await updateCompany(selectedCompany.id, {
                 ...selectedCompany,
                 ...companyData,
@@ -56,10 +60,12 @@ export const Company = () => {
             showSuccess("Company actualizada correctamente");
         } else {
             const newCompany: ICompany = {
-                id: companies.length + 1,
                 ...companyData,
+                id: companies.length + 1,
                 dateCreated: new Date().toISOString(),
             };
+            // const createdCompany = await createCompany(newCompany);
+            // const txHash = await createCompany(newCompany);
             const createdCompany = await createCompany(newCompany);
             const newCompanies = [...companies, createdCompany];
             setCompanies(newCompanies);
@@ -70,7 +76,7 @@ export const Company = () => {
     };
 
     const handleConfirmDelete = async () => {
-        if (companyToDelete) {
+        if (companyToDelete && companyToDelete.id) {
             await deleteCompany(companyToDelete.id);
             setCompanies((prev) => prev.filter((comp) => comp.id !== companyToDelete.id));
             showSuccess("Empresa eliminada correctamente");

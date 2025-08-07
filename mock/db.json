@@ -1,7 +1,6 @@
 {
     "companies": [
         {
-            "account": "0x1234567890abcdef1234567890abcdef12345678",
             "address": "Calle Mayor 123, 28001 Madrid",
             "dateCreated": "2025-02-10T10:54:52.259Z",
             "id": 1,
@@ -9,7 +8,6 @@
             "vatNumber": "B12345678"
         },
         {
-            "account": "0xabcdefabcdefabcdefabcdefabcdefabcdef",
             "address": "Avenida de la Paz 456, 08001 Barcelona",
             "dateCreated": "2025-04-12T10:54:52.259Z",
             "id": 2,
@@ -17,7 +15,6 @@
             "vatNumber": "A87654321"
         },
         {
-            "account": "0x1234567890abcdef1234567890abcdef12345678",
             "address": "Mi dirección test",
             "dateCreated": "2025-07-31T15:15:20.973Z",
             "id": 3,

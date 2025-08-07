@@ -1,4 +1,4 @@
-import { Box, Button, Chip, CircularProgress, Tooltip, Typography } from "@mui/material";
+import { Box, CircularProgress, Tooltip, Typography } from "@mui/material";
 import { AccountBalanceWallet, Link as LinkIcon, Warning } from "@mui/icons-material";
 
 import { useWallet } from "@/providers/useWallet";

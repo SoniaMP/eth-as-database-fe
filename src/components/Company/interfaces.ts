@@ -1,8 +1,7 @@
 export interface ICompany {
     address: string;
     dateCreated: string;
-    id: number;
+    id?: number;
     name: string;
     vatNumber: string;
-    account: string;
 }

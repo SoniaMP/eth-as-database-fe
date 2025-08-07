@@ -29,15 +29,4 @@ export const cellRenders: Record<string, CellRenderFn> = {
             </Box>
         );
     },
-    account: (value) => {
-        return (
-            <Chip
-                label={formatAddress(value)}
-                size="small"
-                variant="outlined"
-                color="primary"
-                sx={{ fontFamily: "monospace", fontSize: "0.75rem" }}
-            />
-        );
-    },
 };

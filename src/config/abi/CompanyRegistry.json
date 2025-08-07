@@ -1,0 +1,35 @@
+[
+    {
+        "type": "function",
+        "name": "getCompanies",
+        "inputs": [],
+        "outputs": [{ "name": "", "type": "string[]", "internalType": "string[]" }],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "registerCompany",
+        "inputs": [{ "name": "_vatNumber", "type": "string", "internalType": "string" }],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "event",
+        "name": "CompanyRegistered",
+        "inputs": [
+            {
+                "name": "owner",
+                "type": "address",
+                "indexed": true,
+                "internalType": "address"
+            },
+            {
+                "name": "vatNumber",
+                "type": "string",
+                "indexed": false,
+                "internalType": "string"
+            }
+        ],
+        "anonymous": false
+    }
+]
